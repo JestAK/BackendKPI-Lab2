@@ -1,5 +1,7 @@
 import uuid
 
+from record import delete_records_by_user
+
 users = {}
 
 def gen_user_id():
@@ -12,14 +14,15 @@ def create_user(name: str) -> dict:
     users[user_id] = user
     return user
 
-def get_user(user_id: int) -> dict | None:
+def get_user(user_id: str) -> dict | None:
     return users.get(user_id)
 
 
-def delete_user(user_id: int) -> bool:
+def delete_user(user_id: str) -> bool:
     if user_id not in users:
         return False
 
+    delete_records_by_user(user_id)
     del users[user_id]
 
     return True

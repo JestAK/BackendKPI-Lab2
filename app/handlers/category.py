@@ -1,4 +1,5 @@
 import uuid
+from record import delete_records_by_category
 
 categories = {}
 
@@ -25,6 +26,7 @@ def delete_category(name: str) -> bool:
         return False
 
     for category_id in ids_to_delete:
+        delete_records_by_category(category_id)
         del categories[category_id]
 
     return True
