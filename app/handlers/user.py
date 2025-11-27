@@ -1,11 +1,9 @@
+import uuid
+
 users = {}
 
-user_counter = 0
-
 def gen_user_id():
-    global user_counter
-    user_id = user_counter
-    user_counter += 1
+    user_id = uuid.uuid4().hex
     return user_id
 
 def create_user(name: str) -> dict:
