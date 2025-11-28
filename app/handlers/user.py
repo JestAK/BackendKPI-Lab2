@@ -1,6 +1,6 @@
 import uuid
 
-from record import delete_records_by_user
+from .record import delete_records_by_user
 
 users = {}
 

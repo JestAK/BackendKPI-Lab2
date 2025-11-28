@@ -1,5 +1,5 @@
 import uuid
-from record import delete_records_by_category
+from .record import delete_records_by_category
 
 categories = {}
 

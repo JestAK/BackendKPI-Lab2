@@ -85,17 +85,27 @@ def get_records():
 @app.post("/record")
 def create_record():
     data = request.get_json()
-    if not data or "name" not in data:
-        return h.error.error_response("Field \"name\" is required")
 
-    record = h.user.create_user(data["name"])
+    if not data:
+        return h.error.error_response("Data is required")
+
+    if "user_id" not in data:
+        return h.error.error_response("Field \"user_id\" is required")
+
+    if "category_id" not in data:
+        return h.error.error_response("Field \"category_id\" is required")
+
+    if "cost" not in data:
+        return h.error.error_response("Field \"cost\" is required")
+
+    record = h.record.create_record(data["user_id"], data["category_id"], data["cost"])
     return jsonify(record), 201
 
-@app.delete("/record/<str:record_id>")
-def delete_user(user_id):
-    result = h.user.delete_user(user_id)
+@app.delete("/record/<string:record_id>")
+def delete_record(record_id):
+    result = h.record.delete_record(record_id)
 
     if not result:
-        return h.error.error_response("User not found", 404)
+        return h.error.error_response("Record not found", 404)
 
-    return jsonify({"message": "User deleted"}, 200)
+    return jsonify({"message": "Record deleted"}, 200)
